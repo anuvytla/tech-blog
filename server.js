@@ -4,6 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sequelize = require('./config/connection');
+const routes = require('./controllers');
 
 require('dotenv').config();
 
@@ -28,7 +29,7 @@ const sess = {
   };
 
 app.use(session(sess));
-
+app.use(routes);
 
 // Connect to the database and sync sequelize models to the DB before starting the Express.js server
 sequelize.sync().then(() => {
